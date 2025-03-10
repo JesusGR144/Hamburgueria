@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Pedidos</title>
+    <link rel="stylesheet" href="assets/styles.css">
+
+</head>
+<body>
+    <h1>Sistema de Pedidos</h1>
+    
+    <div class="container">
+        <div class="left-panel">
+            <h2>Lista de Precios</h2>
+            <ul id="price-list">
+            </ul>
+            
+            <h2>Agregar a la Orden</h2>
+            <div>
+                <label for="product-select">Producto:</label>
+                <select id="product-select">
+                    <option value="">Seleccione un producto</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="quantity">Cantidad:</label>
+                <input type="number" id="quantity" min="1" value="1">
+            </div>
+            
+            <div id="extra-ingredients-section" style="display:none;">
+                <p>¿Desea agregar ingredientes extra?</p>
+                <input type="radio" id="extraYes" name="extra" value="yes">
+                <label for="extraYes">Sí</label>
+                <input type="radio" id="extraNo" name="extra" value="no">
+                <label for="extraNo">No</label>
+                
+                <div id="extraIngredientsList" style="display:none;">
+                </div>
+            </div>
+            
+            <button id="add-to-order">Agregar a la Orden</button>
+        </div>
+        
+        <div class="right-panel">
+            <h2>Orden Actual</h2>
+            <table id="order-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Extras</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody id="order-items">
+                </tbody>
+                <tfoot>
+                    <tr id="discount-row" style="display:none;">
+                        <td colspan="3">Descuento aplicado:</td>
+                        <td id="discount-value">0%</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><strong>Total:</strong></td>
+                        <td id="order-total">$0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+            
+            <div id="discount-section">
+                <h2>Descuento</h2>
+                <div class="discount-inputs">
+                    <div>
+                        <label>
+                            <input type="radio" name="discount-type" value="none" checked onchange="toggleDiscountInputs()">
+                            Sin descuento
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="radio" name="discount-type" value="percentage" onchange="toggleDiscountInputs()">
+                            Descuento por porcentaje:
+                        </label>
+                        <input type="number" id="percentage-input" min="0" max="100" step="1" value="0" 
+                            oninput="applyDiscount()" disabled style="width: 70px; margin-left: 10px;">
+                        <span>%</span>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="radio" name="discount-type" value="fixed" onchange="toggleDiscountInputs()">
+                            Descuento por cantidad:
+                        </label>
+                        <span>$</span>
+                        <input type="number" id="fixed-input" min="0" step="1" value="0" 
+                            oninput="applyDiscount()" disabled style="width: 70px; margin-left: 5px;">
+                    </div>
+                </div>
+            </div>
+            
+            <h2>Pago</h2>
+            <div>
+                <label for="payment">Monto del pago: $</label>
+                <input type="number" id="payment" min="0" step="0.01">
+            </div>
+            <div id="change-result" style="margin-top: 10px;"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
